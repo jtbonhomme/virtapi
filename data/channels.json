@@ -1,0 +1,30 @@
+{
+	"channels": [
+		{
+			"channelName": "Channel 1",
+			"channelId": 1,
+			"interactive": {
+				uri: "/apps/channel1.html",
+				autostart: true
+			},
+			"baseline": "CHAINE DE TEST 1",
+			"uri": "null://"
+		},
+		{
+			"channelName": "Channel 2",
+			"channelId": 2,
+			"interactive": {
+				uri: "/apps/channel2.html",
+				autostart: false
+			},
+			"baseline": "CHAINE DE TEST 2",
+			"uri": "dvb://1.2.3"
+		},
+		{
+			"channelName": "Channel 3",
+			"channelId": 3,
+			"baseline": "CHAINE DE TEST1",
+			"uri": "dvb://4.5.6"
+		}		
+	]
+}

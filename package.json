@@ -1,0 +1,20 @@
+{
+  "name": "g7-webapp",
+  "private": true,
+  "description": "The webapp for the next generation box",
+  "version": "0.0.1",
+  "author": {
+    "name": "Canal+"
+  },
+  "devDependencies": {
+    "grunt": "git://github.com/zyll/grunt.git",
+    "grunt-contrib": "*",
+    "grunt-mocha": "*",
+    "grunt-ftp": "git+ssh://git@github.com:canalplus/grunt-ftp.git",
+    "grunt-telnet": "git+ssh://git@github.com:canalplus/grunt-telnet.git",
+    "mocha": "*",
+    "chai": "*",
+    "sinon": "*",
+    "benchmark": "*"
+  }
+}

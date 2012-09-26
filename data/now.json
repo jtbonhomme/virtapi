@@ -1,0 +1,19 @@
+{
+	next_update_ts: 1343895600,
+	programs: [
+		{ },
+		{
+			"genre": "TOUT PUBLIC",
+			"version": "VF",
+			"end": 1343897700,
+			"progId": 40062415,
+			"odId": "0",
+			"start": 1343894400,
+			"diffId": 67216803,
+			"title": "Secret Story",
+			"image": "/images/IDV_3/4/2/IDV_342798.jpg",
+			"subGenre": "DIVERTISSEMENT",
+			"csa": "AS"
+		}
+	]
+}
