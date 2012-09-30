@@ -22,6 +22,7 @@ def event_stream():
     for message in msgList:
         """ update message queue length """
         get_message.lastLength=len(msgList)
+        """ CAUTION: SSE requires message to be sent with format data MESSAGE\n\n """
         yield 'data: %s\n\n' % message
 
 eventStream=event_stream()
@@ -38,20 +39,15 @@ def get_message():
 
 @app.route('/post', methods=['POST'])
 def post():
-    print 'request.method:%s' % flask.request.method
-    print 'request.headers:%s' % flask.request.headers
     if flask.request.headers['Content-Type'] == 'application/json':
-        print 'This is json : %s' % flask.json.dumps(flask.request.json)
-    """message = flask.request.form['message']
-    user = flask.session.get('user', 'anonymous')
-    now = datetime.datetime.now().replace(microsecond=0).time()"""
-    """ add message to queue """
-    """msgList.append('[%s] %s: %s' % (now.isoformat(), user, message))"""
-    return flask.Response('message posted',
+        """ add message to queue """
+        msgList.append('%s' % flask.json.dumps(flask.request.json))
+    return flask.Response('VIRTUAL: message posted',
                           mimetype="text/html")
 @app.route('/stream')
 def stream():
-    """ check message delivery service """
+    """ check message delivery service (get_message) and send response (empty if no message) """
+    """ CAUTION: EventSource require mimetype to be event-stream """
     return flask.Response(get_message(),
                           mimetype="text/event-stream")
 
