@@ -11,6 +11,13 @@ python core/virtapi.py
 
 Note: tested on MAC OS 10.6.8
 
+Implement Server-Sent Event.
+You can test it with cUrl:
+
+<pre>
+	curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d @jenkins/event.json http://127.0.0.1:1234/post
+</pre>
+
 sse
 ===
 

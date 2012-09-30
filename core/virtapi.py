@@ -9,8 +9,10 @@ DATA_ROOT = "/Users/jean-thierrybonhomme/Developments/virtapi/static"
 
 """ REST API Flask framework """
 
-from flask import Flask, send_from_directory
-app = Flask(__name__)
+import flask
+app = flask.Flask(__name__)
+"""from flask import Flask, send_from_directory
+app = Flask(__name__)"""
 
 """ SSE implementation """
 
@@ -36,11 +38,15 @@ def get_message():
 
 @app.route('/post', methods=['POST'])
 def post():
-    message = flask.request.form['message']
+    print 'request.method:%s' % flask.request.method
+    print 'request.headers:%s' % flask.request.headers
+    if flask.request.headers['Content-Type'] == 'application/json':
+        print 'This is json : %s' % flask.json.dumps(flask.request.json)
+    """message = flask.request.form['message']
     user = flask.session.get('user', 'anonymous')
-    now = datetime.datetime.now().replace(microsecond=0).time()
+    now = datetime.datetime.now().replace(microsecond=0).time()"""
     """ add message to queue """
-    msgList.append('[%s] %s: %s' % (now.isoformat(), user, message))
+    """msgList.append('[%s] %s: %s' % (now.isoformat(), user, message))"""
     return flask.Response('message posted',
                           mimetype="text/html")
 @app.route('/stream')
@@ -51,29 +57,37 @@ def stream():
 
 """ Routes for serving the TestApp """
 
+@app.route('/', methods=['GET'])
+def get_default():
+    return flask.send_from_directory(DATA_ROOT, 'index_testapp.html')
+
 @app.route('/index_testapp.html', methods=['GET'])
-def get_html():
-    return send_from_directory(DATA_ROOT, 'index_testapp.html')
+def get_index():
+    return flask.send_from_directory(DATA_ROOT, 'index_testapp.html')
 
 @app.route('/style.css', methods=['GET'])
 def get_css():
-    return send_from_directory(DATA_ROOT, 'style.css')
+    return flask.send_from_directory(DATA_ROOT, 'style.css')
 
 @app.route('/ajax.js', methods=['GET'])
 def get_ajax():
-    return send_from_directory(DATA_ROOT, 'ajax.js')
+    return flask.send_from_directory(DATA_ROOT, 'ajax.js')
 
 @app.route('/longpoll.js', methods=['GET'])
 def get_poll():
-    return send_from_directory(DATA_ROOT, 'longpoll.js')
+    return flask.send_from_directory(DATA_ROOT, 'longpoll.js')
+
+@app.route('/sse.js', methods=['GET'])
+def get_sse():
+    return flask.send_from_directory(DATA_ROOT, 'sse.js')
 
 @app.route('/app_spec.js', methods=['GET'])
 def get_app():
-    return send_from_directory(DATA_ROOT, 'app_spec.js')
+    return flask.send_from_directory(DATA_ROOT, 'app_spec.js')
 
 @app.route('/CanalLightRomain.otf', methods=['GET'])
 def get_font():
-    return send_from_directory(DATA_ROOT, 'CanalLightRomain.otf')
+    return flask.send_from_directory(DATA_ROOT, 'CanalLightRomain.otf')
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=1234)
