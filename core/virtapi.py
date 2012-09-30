@@ -44,6 +44,8 @@ def post():
         msgList.append('%s' % flask.json.dumps(flask.request.json))
     return flask.Response('VIRTUAL: message posted',
                           mimetype="text/html")
+
+""" Route to allow testapp to receive messages """
 @app.route('/stream')
 def stream():
     """ check message delivery service (get_message) and send response (empty if no message) """
@@ -84,6 +86,10 @@ def get_app():
 @app.route('/CanalLightRomain.otf', methods=['GET'])
 def get_font():
     return flask.send_from_directory(DATA_ROOT, 'CanalLightRomain.otf')
+
+@app.route('/jquery-1.8.2.min.js', methods=['GET'])
+def get_jquery():
+    return flask.send_from_directory(DATA_ROOT, 'jquery-1.8.2.min.js')
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=1234)
